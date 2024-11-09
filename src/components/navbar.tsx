@@ -9,7 +9,7 @@ export default function Navbar() {
         setIsLoading(true);
         
         setTimeout(() => {
-            window.open("https://pedrolinks.vercel.app/", "_blank", "noopener,noreferrer");
+            window.open("https://pedrolinks.vercel.app/", "noopener,noreferrer");
             setIsLoading(false);
         }, 1000);
     };
@@ -25,7 +25,6 @@ export default function Navbar() {
                         id="title" 
                         onClick={handleClick} 
                         href="https://pedrolinks.vercel.app/"
-                        target="_blank"
                         rel="noopener noreferrer"
                     >
                         Contato

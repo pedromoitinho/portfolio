@@ -16,7 +16,7 @@ export default function Home() {
         setIsProjectLoading(true);
         
         setTimeout(() => {
-            window.open(url, "_blank", "noopener,noreferrer");
+            window.open(url, "noopener,noreferrer");
             setIsProjectLoading(false);
         }, 1000);
     };
@@ -107,15 +107,13 @@ export default function Home() {
                             <div className="project-links">
                                 <a 
                                     href={project.github} 
-                                    target="_blank" 
                                     rel="noopener noreferrer"
                                     onClick={handleProjectClick(project.github)}
                                 >
                                     <i className="fab fa-github"></i>
                                 </a>
                                 <a 
-                                    href={project.live} 
-                                    target="_blank" 
+                                    href={project.live}
                                     rel="noopener noreferrer"
                                     onClick={handleProjectClick(project.live)}
                                 >
