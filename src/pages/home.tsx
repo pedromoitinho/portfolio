@@ -16,7 +16,14 @@ export default function Home() {
         setIsProjectLoading(true);
         
         setTimeout(() => {
-            window.location.href = url;
+            try {
+                const newWindow = window.open(url, '_system');
+                if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+                    window.location.href = url;
+                }
+            } catch (error) {
+                window.location.href = url;
+            }
             setIsProjectLoading(false);
         }, 1000);
     };

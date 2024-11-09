@@ -7,9 +7,19 @@ export default function Navbar() {
     const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
         setIsLoading(true);
+        const url = "https://pedrolinks.vercel.app/";
         
         setTimeout(() => {
-            window.location.href = "https://pedrolinks.vercel.app/";
+            try {
+                // Try window.open first
+                const newWindow = window.open(url, '_system');
+                if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+                    // Fallback to location.href
+                    window.location.href = url;
+                }
+            } catch (error) {
+                window.location.href = url;
+            }
             setIsLoading(false);
         }, 1000);
     };
