@@ -16,7 +16,15 @@ export default function Home() {
         setIsProjectLoading(true);
         
         setTimeout(() => {
-            window.open(url, "noopener,noreferrer");
+            try {
+                window.open(url, "_blank", "noopener=yes,noreferrer=yes");
+            } catch (error) {
+                // Fallback for iOS
+                const newWindow = window.open("about:blank", "_blank");
+                if (newWindow) {
+                    newWindow.location.href = url;
+                }
+            }
             setIsProjectLoading(false);
         }, 1000);
     };
@@ -106,7 +114,8 @@ export default function Home() {
                             <p>{project.description}</p>
                             <div className="project-links">
                                 <a 
-                                    href={project.github} 
+                                    href={project.github}
+                                    target="_blank"
                                     rel="noopener noreferrer"
                                     onClick={handleProjectClick(project.github)}
                                 >
@@ -114,6 +123,7 @@ export default function Home() {
                                 </a>
                                 <a 
                                     href={project.live}
+                                    target="_blank"
                                     rel="noopener noreferrer"
                                     onClick={handleProjectClick(project.live)}
                                 >
