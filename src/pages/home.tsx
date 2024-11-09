@@ -21,6 +21,15 @@ export default function Home() {
         }, 1000);
     };
 
+    // Add loading screen while page loads
+    if (isLoading) {
+        return (
+            <div className="loading-screen">
+                <div className="loading-spinner"></div>
+            </div>
+        );
+    }
+
     return (
         <section className="background">
             <Navbar />
