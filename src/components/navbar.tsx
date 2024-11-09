@@ -9,15 +9,7 @@ export default function Navbar() {
         setIsLoading(true);
         
         setTimeout(() => {
-            try {
-                window.open("https://pedrolinks.vercel.app/", "_blank", "noopener=yes,noreferrer=yes");
-            } catch (error) {
-                // Fallback for iOS
-                const newWindow = window.open("about:blank", "_blank");
-                if (newWindow) {
-                    newWindow.location.href = "https://pedrolinks.vercel.app/";
-                }
-            }
+            window.location.href = "https://pedrolinks.vercel.app/";
             setIsLoading(false);
         }, 1000);
     };

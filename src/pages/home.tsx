@@ -16,15 +16,7 @@ export default function Home() {
         setIsProjectLoading(true);
         
         setTimeout(() => {
-            try {
-                window.open(url, "_blank", "noopener=yes,noreferrer=yes");
-            } catch (error) {
-                // Fallback for iOS
-                const newWindow = window.open("about:blank", "_blank");
-                if (newWindow) {
-                    newWindow.location.href = url;
-                }
-            }
+            window.location.href = url;
             setIsProjectLoading(false);
         }, 1000);
     };
@@ -164,7 +156,7 @@ const projects = [
         description: "Criação do jogo popular Simon, com tecnologias como JQUERY, e CSS",
         image: "https://raw.githubusercontent.com/pedromoitinho/jogo/main/image.png",
         github: "https://github.com/pedromoitinho/jogo",
-        live: "https://pedromoitinho.github.io/jogo/"
+        live: "https://jogo-red-five.vercel.app/"
     },
     // Add more projects
 ];
