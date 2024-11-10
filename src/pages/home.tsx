@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import "./home.scss";
 import Navbar from "../components/navbar";
 
@@ -7,6 +7,40 @@ export default function Home() {
     const [isLoading, setIsLoading] = useState(true);
     const [isDownloading, setIsDownloading] = useState(false);
     const [isProjectLoading, setIsProjectLoading] = useState(false);
+
+    // Cache project data using useMemo
+    const projects = useMemo(() => [
+        {
+            title: "CodeFlix",
+            description: "Plataforma de animes, feita com Svelte e SCSS, e GRAPHQL API",
+            image: "https://raw.githubusercontent.com/pedromoitinho/codeflix/refs/heads/main/pc.png",
+            github: "https://github.com/pedromoitinho/codeflix",
+            live: "https://codeflix-pi.vercel.app/"
+        },
+        {
+            title: "Links",
+            description: "Plataforma com links para redes sociais, e animações interativas, feitas com SCSS",
+            image: "https://raw.githubusercontent.com/pedromoitinho/pedrolinks/refs/heads/main/Screenshot_20241107_030457.png",
+            github: "https://github.com/pedromoitinho/pedrolinks",
+            live: "https://pedrolinks.vercel.app/"
+        },
+        {
+            title: "Jogo Simon",
+            description: "Criação do jogo popular Simon, com tecnologias como JQUERY, e CSS",
+            image: "https://raw.githubusercontent.com/pedromoitinho/jogo/main/image.png",
+            github: "https://github.com/pedromoitinho/jogo",
+            live: "https://jogo-red-five.vercel.app/"
+        },
+        // Add more projects
+    ], []);
+
+    // Preload images
+    useEffect(() => {
+        projects.forEach(project => {
+            const img = new Image();
+            img.src = project.image;
+        });
+    }, [projects]);
 
     // Memoize handlers
     const handleProjectClick = useCallback((url: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -136,28 +170,3 @@ export default function Home() {
         </section>
     );
 }
-
-const projects = [
-    {
-        title: "CodeFlix",
-        description: "Plataforma de animes, feita com Svelte e SCSS, e GRAPHQL API",
-        image: "https://raw.githubusercontent.com/pedromoitinho/codeflix/refs/heads/main/pc.png",
-        github: "https://github.com/pedromoitinho/codeflix",
-        live: "https://codeflix-pi.vercel.app/"
-    },
-    {
-        title: "Links",
-        description: "Plataforma com links para redes sociais, e animações interativas, feitas com SCSS",
-        image: "https://raw.githubusercontent.com/pedromoitinho/pedrolinks/refs/heads/main/Screenshot_20241107_030457.png",
-        github: "https://github.com/pedromoitinho/pedrolinks",
-        live: "https://pedrolinks.vercel.app/"
-    },
-    {
-        title: "Jogo Simon",
-        description: "Criação do jogo popular Simon, com tecnologias como JQUERY, e CSS",
-        image: "https://raw.githubusercontent.com/pedromoitinho/jogo/main/image.png",
-        github: "https://github.com/pedromoitinho/jogo",
-        live: "https://jogo-red-five.vercel.app/"
-    },
-    // Add more projects
-];
