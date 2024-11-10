@@ -119,8 +119,8 @@ export default function Home() {
                         <span>SCSS</span>
                     </div>
                     <div className="skill-item">
-                        <i className="fab fa-html5"></i>
-                        <span>HTML5</span>
+                        <i className="fa-brands fa-node"></i>
+                        <span>NODE.JS</span>
                     </div>
                     <div className="skill-item">
                         <svg viewBox="0 0 24 24" className="typescript-icon">
