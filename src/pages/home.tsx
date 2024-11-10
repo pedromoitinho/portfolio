@@ -43,13 +43,27 @@ export default function Home() {
     }, [projects]);
 
     // Memoize handlers
-    const handleProjectClick = useCallback((url: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const handleProjectClick = useCallback((url: string) => (e: React.MouseEvent<HTMLAnchorElement> | React.TouchEvent) => {
         e.preventDefault();
         setIsProjectLoading(true);
-        
+
+        // Delay for loading animation
         setTimeout(() => {
-            window.open(url, '_blank', 'noopener,noreferrer');
-            setIsProjectLoading(false);
+            try {
+                window.location.href = url;
+            } catch (error) {
+                console.error('Navigation error:', error);
+                // Fallback for iOS
+                const link = document.createElement('a');
+                link.href = url;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } finally {
+                setIsProjectLoading(false);
+            }
         }, 1000);
     }, []);
 
@@ -145,6 +159,9 @@ export default function Home() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     onClick={handleProjectClick(project.github)}
+                                    onTouchStart={() => {}} // Enable mobile touch events
+                                    role="button"
+                                    aria-label="View GitHub Repository"
                                 >
                                     <i className="fab fa-github"></i>
                                 </a>
@@ -153,6 +170,9 @@ export default function Home() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     onClick={handleProjectClick(project.live)}
+                                    onTouchStart={() => {}} // Enable mobile touch events
+                                    role="button"
+                                    aria-label="View Live Project"
                                 >
                                     <i className="fas fa-external-link-alt"></i>
                                 </a>
