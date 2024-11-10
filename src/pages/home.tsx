@@ -1,40 +1,34 @@
+import { useState, useEffect, useCallback } from 'react';
 import "./home.scss";
 import Navbar from "../components/navbar";
-import { useState, useEffect } from "react";
+
 
 export default function Home() {
     const [isLoading, setIsLoading] = useState(true);
     const [isDownloading, setIsDownloading] = useState(false);
     const [isProjectLoading, setIsProjectLoading] = useState(false);
 
-    useEffect(() => {
-        setTimeout(() => setIsLoading(false), 1500);
-    }, []);
-
-    const handleProjectClick = (url: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // Memoize handlers
+    const handleProjectClick = useCallback((url: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
         setIsProjectLoading(true);
         
         setTimeout(() => {
-            try {
-                const newWindow = window.open(url, '_system');
-                if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
-                    window.location.href = url;
-                }
-            } catch (error) {
-                window.location.href = url;
-            }
+            window.open(url, '_blank', 'noopener,noreferrer');
             setIsProjectLoading(false);
         }, 1000);
-    };
+    }, []);
 
-    // Add loading screen while page loads
+    useEffect(() => {
+        const animationId = requestAnimationFrame(() => {
+            setIsLoading(false);
+        });
+
+        return () => cancelAnimationFrame(animationId);
+    }, []);
+
     if (isLoading) {
-        return (
-            <div className="loading-screen">
-                <div className="loading-spinner"></div>
-            </div>
-        );
+        return <div className="loading-screen"><div className="loading-spinner"/></div>;
     }
 
     return (
