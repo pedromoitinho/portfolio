@@ -20,15 +20,22 @@ export const Home: React.FC = () => {
             description: "Plataforma de animes, feita com Svelte e SCSS, e GRAPHQL API",
             image: "https://raw.githubusercontent.com/pedromoitinho/codeflix/refs/heads/main/pc.png",
             github: "https://github.com/pedromoitinho/codeflix",
-            live: "https://codeflix-pi.vercel.app/"
+            live: "https://codeflix-pi.vercel.app/",
         },
         {
             title: "Links",
             description: "Plataforma com links para redes sociais",
             image: "https://raw.githubusercontent.com/pedromoitinho/pedrolinks/refs/heads/main/Screenshot_20241107_030457.png",
             github: "https://github.com/pedromoitinho/pedrolinks",
-            live: "https://pedrolinks.vercel.app/"
-        }
+            live: "https://pedrolinks.vercel.app/",
+        },
+        {
+            title: "Jogo Simon",
+            description: "Código baseado no famoso jogo Simon",
+            image: "https://raw.githubusercontent.com/pedromoitinho/jogo/main/image.png",
+            github: "https://github.com/pedromoitinho/jogo",
+            live: "https://jogo-red-five.vercel.app/",
+        },
     ]);
 
     useEffect(() => {
