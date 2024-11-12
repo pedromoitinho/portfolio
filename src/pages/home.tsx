@@ -2,14 +2,19 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import "./home.scss";
 import Navbar from "../components/navbar";
 
+interface Project {
+  title: string;
+  description: string;
+  image: string;
+  github: string;
+  live: string;
+}
 
-export default function Home() {
+export const Home: React.FC = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [isDownloading, setIsDownloading] = useState(false);
     const [isProjectLoading, setIsProjectLoading] = useState(false);
-
-    // Cache project data using useMemo
-    const projects = useMemo(() => [
+    const [projects] = useState<Project[]>([
         {
             title: "CodeFlix",
             description: "Plataforma de animes, feita com Svelte e SCSS, e GRAPHQL API",
@@ -19,23 +24,15 @@ export default function Home() {
         },
         {
             title: "Links",
-            description: "Plataforma com links para redes sociais, e animações interativas, feitas com SCSS",
+            description: "Plataforma com links para redes sociais",
             image: "https://raw.githubusercontent.com/pedromoitinho/pedrolinks/refs/heads/main/Screenshot_20241107_030457.png",
             github: "https://github.com/pedromoitinho/pedrolinks",
             live: "https://pedrolinks.vercel.app/"
-        },
-        {
-            title: "Jogo Simon",
-            description: "Criação do jogo popular Simon, com tecnologias como JQUERY, e CSS",
-            image: "https://raw.githubusercontent.com/pedromoitinho/jogo/main/image.png",
-            github: "https://github.com/pedromoitinho/jogo",
-            live: "https://jogo-red-five.vercel.app/"
-        },
-        // Add more projects
-    ], []);
+        }
+    ]);
 
-    // Preload images
     useEffect(() => {
+        // Preload images
         projects.forEach(project => {
             const img = new Image();
             img.src = project.image;
@@ -43,28 +40,30 @@ export default function Home() {
     }, [projects]);
 
     // Memoize handlers
-    const handleProjectClick = useCallback((url: string) => (e: React.MouseEvent<HTMLAnchorElement> | React.TouchEvent) => {
-        e.preventDefault();
-        setIsProjectLoading(true);
+    const handleProjectClick = useCallback((url: string) => {
+        return (e: React.MouseEvent | React.TouchEvent) => {
+            e.preventDefault();
+            setIsProjectLoading(true);
 
-        // Delay for loading animation
-        setTimeout(() => {
-            try {
-                window.location.href = url;
-            } catch (error) {
-                console.error('Navigation error:', error);
-                // Fallback for iOS
-                const link = document.createElement('a');
-                link.href = url;
-                link.target = '_blank';
-                link.rel = 'noopener noreferrer';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            } finally {
-                setIsProjectLoading(false);
-            }
-        }, 1000);
+            // Delay for loading animation
+            setTimeout(() => {
+                try {
+                    window.location.href = url;
+                } catch (error) {
+                    console.error('Navigation error:', error);
+                    // Fallback for iOS
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                } finally {
+                    setIsProjectLoading(false);
+                }
+            }, 1000);
+        };
     }, []);
 
     useEffect(() => {
@@ -189,4 +188,6 @@ export default function Home() {
             )}
         </section>
     );
-}
+};
+
+export default Home;
