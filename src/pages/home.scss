@@ -21,7 +21,17 @@ $accent-color: #ffb8ff;
   z-index: 1;
   overflow: hidden;
 }
-
+#certificado{
+  color:$accent-color;
+  z-index:99999999999;
+  margin-top:1.25%;
+  left:5.5%;
+  font-size:1rem;
+  position:fixed;
+  @media screen and (max-width:768px){
+      top:3%;
+  }
+}
 .hero {
   height: 80dvh;
   display: flex;

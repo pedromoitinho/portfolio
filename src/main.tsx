@@ -5,12 +5,14 @@ import "./main.scss";
 
 // Lazy load components with prefetch
 const Home = lazy(() => import("./pages/home"));
+const Certificado = lazy(() => import("./pages/certificado"));
 
 // Prefetch component after initial load
 const prefetchComponent = () => {
     const link = document.createElement('link');
     link.rel = 'prefetch';
     link.href = '/src/pages/home.tsx';
+    link.href = '/src/pages/certificado.tsx';
     document.head.appendChild(link);
 };
 
@@ -24,7 +26,17 @@ const router = createBrowserRouter([{
             <Home />
         </Suspense>
     ),
-}])
+    },
+    {
+    path:"/certificado",
+    element:(
+        <Suspense fallback={<div>Loading...</div>}>
+            <Certificado/>
+        </Suspense>
+    )
+    }
+    
+    ])
 
 createRoot(document.getElementById('root')!).render(
   <RouterProvider router={router}/>

@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import "./home.scss";
 import Navbar from "../components/navbar";
+import { Link } from 'react-router-dom';
 
 interface Project {
   title: string;
@@ -87,6 +88,7 @@ export const Home: React.FC = () => {
 
     return (
         <section className="background">
+            <Link to="/certificado" id="certificado">Certificados</Link>
             <Navbar />
             
             <div className="hero">
