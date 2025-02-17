@@ -93,7 +93,7 @@ export const Home: React.FC = () => {
             
             <div className="hero">
                 <h1>Pedro Moitinho</h1>
-                <p>Desenvolvedor Frontend</p>
+                <p>Desenvolvedor</p>
                 <a 
                     id="curriculo" 
                     href="/assets/PEDRO MOITINHO.pdf" 
