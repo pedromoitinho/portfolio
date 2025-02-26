@@ -106,7 +106,7 @@ export const Home: React.FC = () => {
                         
                         setTimeout(() => {
                             const link = document.createElement('a');
-                            link.href = '/assets/PEDRO MOITINHO.pdf';
+                            link.href = '../assets/PEDRO MOITINHO.pdf';
                             link.download = 'PEDRO MOITINHO.pdf';
                             document.body.appendChild(link);
                             link.click();
