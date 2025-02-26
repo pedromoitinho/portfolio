@@ -96,7 +96,7 @@ export const Home: React.FC = () => {
                 <p>Desenvolvedor</p>
                 <a 
                     id="curriculo" 
-                    href="/assets/PEDRO MOITINHO.pdf" 
+                    href="../assets/PEDRO MOITINHO.pdf" 
                     download="PEDRO MOITINHO.pdf" 
                     target="_blank"
                     rel="noopener noreferrer"
