@@ -96,7 +96,7 @@ export const Home: React.FC = () => {
                 <p>Desenvolvedor</p>
                 <a 
                     id="curriculo" 
-                    href="/PEDRO MOITINHO.pdf" 
+                    href={`${import.meta.env.BASE_URL}assets/PEDRO MOITINHO.pdf`}
                     download="PEDRO MOITINHO.pdf" 
                     target="_blank"
                     rel="noopener noreferrer"
@@ -104,9 +104,11 @@ export const Home: React.FC = () => {
                         e.preventDefault();
                         setIsDownloading(true);
                         
+                        const pdfPath = `${import.meta.env.BASE_URL}assets/PEDRO MOITINHO.pdf`;
+                        
                         setTimeout(() => {
                             const link = document.createElement('a');
-                            link.href = '/PEDRO MOITINHO.pdf';
+                            link.href = pdfPath;
                             link.download = 'PEDRO MOITINHO.pdf';
                             document.body.appendChild(link);
                             link.click();
